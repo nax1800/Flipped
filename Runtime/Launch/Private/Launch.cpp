@@ -11,6 +11,25 @@
 
 DEFINE_LOG_CATEGORY(LogLaunch, ELogVerbosity::All);
 
+#ifdef DEV
+    inline void (*oProcessEvent)(UObject*, UFunction*, void*);
+    inline void ProcessEvent(UObject* Context, UFunction* Function, void* Parameters)
+    {
+        if (Context == nullptr || Function == nullptr)
+            return oProcessEvent(Context, Function, Parameters);
+
+        string FunctionName = Function->GetName();
+        /*
+            if (FunctionName == "")
+            {
+                * Log here, call something, etc....
+            }
+        */
+
+        return oProcessEvent(Context, Function, Parameters);
+    }
+#endif // DEV
+
 DWORD thMain(LPVOID lpVoid)
 {
 #ifdef DEV
@@ -45,6 +64,13 @@ DWORD thMain(LPVOID lpVoid)
     }
     else
         UE_LOG(LogLaunch, ELogVerbosity::Display, "Hooks successful.");
+
+#ifdef DEV
+    if (CreateHook(Offsets::ProcessEvent, ProcessEvent, (void**)&oProcessEvent) == true)
+        UE_LOG(LogLaunch, ELogVerbosity::Display, "ProcessEvent has been hooked.");
+    else
+        UE_LOG(LogLaunch, ELogVerbosity::Warning, "ProcessEvent has failed to hook.");
+#endif // DEV
 
     return 0;
 }

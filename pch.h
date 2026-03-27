@@ -8,6 +8,9 @@
 #include <string>
 
 #define DEV
+//#define CHEATS
+//#define LATEGAME
+//#define CREATIVE
 
 #include "MinHook/include/MinHook.h"
 #include "CppSDK/SDK.hpp"

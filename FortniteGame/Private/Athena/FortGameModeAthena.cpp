@@ -113,7 +113,7 @@ void FortGameModeAthena::HandleStartingNewPlayer(AFortGameModeAthena* Context, A
 		* MAYBE: Setup creative portal.
 		* MAYBE: Give LateGame Items. (If I do LateGame, probs not tbh)
 	*/
-
+	AFortGameStateAthena* GameState = reinterpret_cast<AFortGameStateAthena*>(Context->GameState);
 	AFortPlayerStateAthena* PlayerState = reinterpret_cast<AFortPlayerStateAthena*>(NewPlayer->PlayerState);
 
 	for (FItemAndCount StartingItem : Context->StartingItems)
@@ -123,6 +123,22 @@ void FortGameModeAthena::HandleStartingNewPlayer(AFortGameModeAthena* Context, A
 	FortInventory::AddItem(NewPlayer->WorldInventory, NewPlayer->CosmeticLoadoutPC.Pickaxe->WeaponDefinition);
 
 	PlayerState->WorldPlayerId = PlayerState->PlayerId;
+
+	PlayerState->SquadId = PlayerState->TeamIndex - 3;
+	PlayerState->OnRep_SquadId();
+
+	FGameMemberInfo Member;
+	Member.MostRecentArrayReplicationKey = -1;
+	Member.ReplicationID = -1;
+	Member.ReplicationKey = -1;
+	Member.TeamIndex = PlayerState->TeamIndex;
+	Member.SquadId = PlayerState->SquadId;
+	Member.MemberUniqueId = PlayerState->UniqueId;
+
+	GameState->GameMemberInfoArray.Members.Add(Member);
+	//GameState->GameMemberInfoArray.MarkItemDirty(Member);
+
+	UE_LOG(LogFortGameMode, ELogVerbosity::Display, "%s joined the game with squad id %i.", PlayerState->GetPlayerName().ToString().c_str(), PlayerState->SquadId);
 
 	return oHandleStartingNewPlayer(Context, NewPlayer);
 }
