@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Flipped.vcxproj" />
+  <Project Path="Flipped.vcxproj" Id="e4a272af-dc87-475d-9170-780f65dbe1c6" />
 </Solution>
