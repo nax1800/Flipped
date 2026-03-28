@@ -105,8 +105,8 @@ bool FortInventory::AddItem(AFortInventory* Context, UFortItemDefinition* ItemDe
 
 			Context->Inventory.ReplicatedEntries.Add(ItemEntry);
 			Context->HandleInventoryLocalUpdate();
-			//Context->Inventory.MarkArrayDirty();
-			//Context->Inventory.MarkItemDirty(ItemEntry);
+			Context->Inventory.MarkArrayDirty();
+			Context->Inventory.MarkItemDirty(ItemEntry);
 		}
 	}
 	else if (bForceNewItem && IsFull(Context) == true)
@@ -149,8 +149,8 @@ bool FortInventory::AddItem(AFortInventory* Context, UFortItemDefinition* ItemDe
 						ReplicatedEntry->StateValues.Add(Value);
 					}
 
-					//Context->Inventory.MarkItemDirty(CurrentEntry);
-					//Context->Inventory.MarkItemDirty(*ReplicatedEntry);
+					Context->Inventory.MarkItemDirty(CurrentEntry);
+					Context->Inventory.MarkItemDirty(*ReplicatedEntry);
 
 					if (OverStack <= 0)
 						return true;
@@ -196,6 +196,11 @@ bool FortInventory::AddItem(AFortInventory* Context, UFortItemDefinition* ItemDe
 
 	Context->Inventory.ReplicatedEntries.Add(ItemEntry);
 	Context->HandleInventoryLocalUpdate();
-//	Context->Inventory.MarkArrayDirty();
-//	Context->Inventory.MarkItemDirty(ItemEntry);
+	Context->Inventory.MarkArrayDirty();
+	Context->Inventory.MarkItemDirty(ItemEntry);
+}
+
+bool FortInventory::AddItem(AFortInventory* Context, FFortItemEntry ItemEntry, bool bForceNewItem)
+{
+	return AddItem(Context, ItemEntry.ItemDefinition, ItemEntry.Count, ItemEntry.LoadedAmmo, bForceNewItem);
 }

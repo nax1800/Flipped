@@ -4,7 +4,7 @@
 
 void NetDriver::TickFlush(UNetDriver* Context, float DeltaSeconds)
 {
-	if (Context->ReplicationDriver)
+	if (Context->ReplicationDriver != nullptr)
 		ReplicationDriver::ServerReplicateActors(Context->ReplicationDriver, DeltaSeconds);
 
 	return oTickFlush(Context, DeltaSeconds);

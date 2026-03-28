@@ -8,6 +8,7 @@
 #include <string>
 
 #define DEV
+#define NOMCP
 //#define CHEATS
 //#define LATEGAME
 //#define CREATIVE
@@ -54,5 +55,12 @@ inline void ExecHook(UFunction* Function, void* Detour, T& Original = NullOrigin
 
 	Function->ExecFunction = reinterpret_cast<UFunction::FNativeFuncPtr>(Detour);
 }
+
+#ifdef NOMCP
+	inline bool IsRunningNoMCP()
+	{
+		return false;
+	}
+#endif //NOMCP
 
 #endif //PCH_H

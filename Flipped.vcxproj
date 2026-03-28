@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FortniteGame\Public\Online\FortGameSession.h" />
     <ClInclude Include="FortniteGame\Public\Items\FortItemDefinition.h" />
     <ClInclude Include="FortniteGame\Public\Items\FortWeaponItemDefinition.h" />
     <ClInclude Include="OnlineGameplayFramework\Public\McpProfileSys\McpProfileGroup.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="CppSDK\SDK\GameplayAbilities_functions.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="FortniteGame\Private\Online\FortGameSession.cpp" />
     <ClCompile Include="FortniteGame\Private\Items\FortItemDefinition.cpp" />
     <ClCompile Include="FortniteGame\Private\Items\FortWeaponItemDefinition.cpp" />
     <ClCompile Include="OnlineGameplayFramework\Private\McpProfileSys\McpProfileGroup.cpp" />

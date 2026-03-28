@@ -28,7 +28,7 @@ bool FortGameModeAthena::ReadyToStartMatch(AFortGameModeAthena* Context)
 		CurrentPlaylistInfo.BasePlaylist = Playlist;
 		CurrentPlaylistInfo.OverridePlaylist = Playlist;
 		CurrentPlaylistInfo.ArrayReplicationKey++;
-		// CurrentPlaylistInfo.MarkArrayDirty();
+		CurrentPlaylistInfo.MarkArrayDirty();
 		GameState->OnRep_CurrentPlaylistInfo();
 
 		GameState->CurrentPlaylistId = Playlist->PlaylistId;
@@ -65,12 +65,14 @@ bool FortGameModeAthena::ReadyToStartMatch(AFortGameModeAthena* Context)
 
 		FName NAME_GameNetDriver = UKismetStringLibrary::Conv_StringToName(FString(L"GameNetDriver"));
 
-		UIpNetDriver* NetDriver = reinterpret_cast<UIpNetDriver*>(nullptr);
+		UIpNetDriver* NetDriver = reinterpret_cast<UIpNetDriver*>(reinterpret_cast<UNetDriver*(*)(UEngine*, UWorld*, FName)>(InSDKUtils::GetImageBase() + 0x159AD28)(UFortEngine::GetEngine(), World, NAME_GameNetDriver));
 		if (NetDriver == nullptr)
 		{
 			UE_LOG(LogFortGameMode, ELogVerbosity::Error, "Could not create NetDriver.");
 			return false;
 		}
+
+		Context->bEnableReplicationGraph = true;
 
 		NetDriver->World = World;
 		NetDriver->NetDriverName = FName(282);
@@ -136,7 +138,7 @@ void FortGameModeAthena::HandleStartingNewPlayer(AFortGameModeAthena* Context, A
 	Member.MemberUniqueId = PlayerState->UniqueId;
 
 	GameState->GameMemberInfoArray.Members.Add(Member);
-	//GameState->GameMemberInfoArray.MarkItemDirty(Member);
+	GameState->GameMemberInfoArray.MarkItemDirty(Member);
 
 	UE_LOG(LogFortGameMode, ELogVerbosity::Display, "%s joined the game with squad id %i.", PlayerState->GetPlayerName().ToString().c_str(), PlayerState->SquadId);
 

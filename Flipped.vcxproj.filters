@@ -63,6 +63,9 @@
     <ClInclude Include="OnlineGameplayFramework\Public\McpProfileSys\McpProfileGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FortniteGame\Public\Online\FortGameSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\Launch\Private\Launch.cpp">
@@ -135,6 +138,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OnlineGameplayFramework\Private\McpProfileSys\McpProfileGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FortniteGame\Private\Online\FortGameSession.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

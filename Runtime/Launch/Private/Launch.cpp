@@ -48,10 +48,9 @@ DWORD thMain(LPVOID lpVoid)
 
     Sleep(3000);
 
-    bool* GIsClient = reinterpret_cast<bool*>(InSDKUtils::GetImageBase() + 0xB30CF9F);
     UWorld* World = UWorld::GetWorld();
 
-    *GIsClient = false;
+    *reinterpret_cast<bool*>(InSDKUtils::GetImageBase() + 0xB30CF9F) = false; // GIsClient
 
     World->OwningGameInstance->LocalPlayers.Remove(0);
     UKismetSystemLibrary::ExecuteConsoleCommand(World, FString(L"open Artemis_Terrain"), nullptr);
@@ -71,6 +70,11 @@ DWORD thMain(LPVOID lpVoid)
     else
         UE_LOG(LogLaunch, ELogVerbosity::Warning, "ProcessEvent has failed to hook.");
 #endif // DEV
+
+#ifdef NOMCP
+    if (CreateHook(0x106A3BC, IsRunningNoMCP) == true)
+        UE_LOG(LogLaunch, ELogVerbosity::Display, "IsRunningNoMCP has been hooked.");
+#endif //NOMCP
 
     return 0;
 }
