@@ -78,17 +78,14 @@ bool FortGameModeAthena::ReadyToStartMatch(AFortGameModeAthena* Context)
 		NetDriver->NetDriverName = FName(282);
 
 		World->NetDriver = NetDriver;
-	
+
+		for (FLevelCollection& LevelCollection : World->LevelCollections) { LevelCollection.NetDriver = NetDriver; }
 
 		FString Error;
-		FURL URL{};
-		URL.Port = 7777;
 
-		if (IpNetDriver::InitListen(NetDriver, World, URL, false, Error) == true)
+		if (IpNetDriver::InitListen(NetDriver, World, World->PersistentLevel->URL, false, Error) == true)
 		{
 			NetDriver::SetWorld(NetDriver, World);
-
-			for (FLevelCollection& LevelCollection : World->LevelCollections) { LevelCollection.NetDriver = NetDriver; }
 		}
 		else
 		{

@@ -10,6 +10,7 @@
 #include "McpProfileSys/McpProfileGroup.h"
 
 DEFINE_LOG_CATEGORY(LogLaunch, ELogVerbosity::All);
+DEFINE_LOG_CATEGORY(LogProcessEvent, ELogVerbosity::All);
 
 #ifdef DEV
     inline void (*oProcessEvent)(UObject*, UFunction*, void*);
@@ -19,16 +20,19 @@ DEFINE_LOG_CATEGORY(LogLaunch, ELogVerbosity::All);
             return oProcessEvent(Context, Function, Parameters);
 
         string FunctionName = Function->GetName();
-        /*
-            if (FunctionName == "")
-            {
-                * Log here, call something, etc....
-            }
-        */
+        if (Context->IsA(UFortKismetLibrary::StaticClass()))
+        {
+			UE_LOG(LogProcessEvent, ELogVerbosity::Display, "UFortKismetLibrary::%s was called.", FunctionName.c_str());
+        }
 
         return oProcessEvent(Context, Function, Parameters);
     }
 #endif // DEV
+
+inline bool ReturnTrue()
+{
+    return true;
+}
 
 DWORD thMain(LPVOID lpVoid)
 {
@@ -63,6 +67,20 @@ DWORD thMain(LPVOID lpVoid)
     }
     else
         UE_LOG(LogLaunch, ELogVerbosity::Display, "Hooks successful.");
+
+    for (uintptr_t OffsetToNull : vector<uintptr_t>{ 0x44a9b00, 0x1f901ac, 0x258d0dc, 0x677f0e4 })
+    {
+		uintptr_t func = InSDKUtils::GetImageBase() + OffsetToNull;
+        DWORD dwProtection;
+        VirtualProtect((PVOID)func, 1, PAGE_EXECUTE_READWRITE, &dwProtection);
+
+        *(uint8_t*)func = 0xC3;
+
+        DWORD dwTemp;
+        VirtualProtect((PVOID)func, 1, dwProtection, &dwTemp);
+    }
+
+    CreateHook(0x65cde18, ReturnTrue);
 
 #ifdef DEV
     if (CreateHook(Offsets::ProcessEvent, ProcessEvent, (void**)&oProcessEvent) == true)

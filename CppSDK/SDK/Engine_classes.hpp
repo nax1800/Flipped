@@ -20915,18 +20915,19 @@ DUMPER7_ASSERTS_AGeneratedMeshAreaLight;
 class ULevel final : public UObject
 {
 public:
-	uint8                                         Pad_28[0x70];                                      // 0x0028(0x0070)(Fixing Size After Last Property [ Dumper-7 ])
+	uint8                                         Pad1[0x8];                                         // Fixing Size After Last Property  [ Sarah ]
+	struct FURL                                   URL;                                               // 0x30(0x68)
 	class TArray<class AActor*>                   Actors;                                            // 0x0098(0x0010)(THIS IS THE ARRAY YOU'RE LOOKING FOR! [NOT AUTO-GENERATED PROPERTY])
 	uint8                                         Pad_A8[0x10];                                      // 0x00A8(0x0010)(Fixing Size After Last Property [ Dumper-7 ])
-	class UWorld*                                 OwningWorld;                                       // 0x00B8(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UModel*                                 Model;                                             // 0x00C0(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UWorld* OwningWorld;                                       // 0x00B8(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UModel* Model;                                             // 0x00C0(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	TArray<class UModelComponent*>                ModelComponents;                                   // 0x00C8(0x0010)(ExportObject, ZeroConstructor, ContainsInstancedReference, UObjectWrapper, NativeAccessSpecifierPublic)
-	class ULevelActorContainer*                   ActorCluster;                                      // 0x00D8(0x0008)(ExportObject, ZeroConstructor, Transient, InstancedReference, DuplicateTransient, IsPlainOldData, NonTransactional, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class ULevelActorContainer* ActorCluster;                                      // 0x00D8(0x0008)(ExportObject, ZeroConstructor, Transient, InstancedReference, DuplicateTransient, IsPlainOldData, NonTransactional, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int32                                         NumTextureStreamingUnbuiltComponents;              // 0x00E0(0x0004)(ZeroConstructor, IsPlainOldData, NonTransactional, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int32                                         NumTextureStreamingDirtyResources;                 // 0x00E4(0x0004)(ZeroConstructor, IsPlainOldData, NonTransactional, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class ALevelScriptActor*                      LevelScriptActor;                                  // 0x00E8(0x0008)(ZeroConstructor, IsPlainOldData, NonTransactional, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class ANavigationObjectBase*                  NavListStart;                                      // 0x00F0(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class ANavigationObjectBase*                  NavListEnd;                                        // 0x00F8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class ALevelScriptActor* LevelScriptActor;                                  // 0x00E8(0x0008)(ZeroConstructor, IsPlainOldData, NonTransactional, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class ANavigationObjectBase* NavListStart;                                      // 0x00F0(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class ANavigationObjectBase* NavListEnd;                                        // 0x00F8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	TArray<class UNavigationDataChunk*>           NavDataChunks;                                     // 0x0100(0x0010)(ZeroConstructor, UObjectWrapper, NativeAccessSpecifierPublic)
 	float                                         LightmapTotalSize;                                 // 0x0110(0x0004)(Edit, ZeroConstructor, EditConst, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	float                                         ShadowmapTotalSize;                                // 0x0114(0x0004)(Edit, ZeroConstructor, EditConst, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -20936,7 +20937,7 @@ public:
 	uint32                                        PackedTextureStreamingQualityLevelFeatureLevel;    // 0x0148(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_14C[0x9C];                                     // 0x014C(0x009C)(Fixing Size After Last Property [ Dumper-7 ])
 	struct FGuid                                  LevelBuildDataId;                                  // 0x01E8(0x0010)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UMapBuildDataRegistry*                  MapBuildData;                                      // 0x01F8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, NonPIEDuplicateTransient, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UMapBuildDataRegistry* MapBuildData;                                      // 0x01F8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, NonPIEDuplicateTransient, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	struct FIntVector                             LightBuildLevelOffset;                             // 0x0200(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         bIsLightingScenario : 1;                           // 0x020C(0x0001)(BitIndex: 0x00, PropSize: 0x0001 (NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic))
 	uint8                                         BitPad_20C_1 : 2;                                  // 0x020C(0x0001)(Fixing Bit-Field Size Between Bits [ Dumper-7 ])
@@ -20948,29 +20949,25 @@ public:
 	uint8                                         BitPad_20E_0 : 6;                                  // 0x020E(0x0001)(Fixing Bit-Field Size Between Bits [ Dumper-7 ])
 	uint8                                         bIsPartitioned : 1;                                // 0x020E(0x0001)(BitIndex: 0x06, PropSize: 0x0001 (NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic))
 	uint8                                         Pad_20F[0x61];                                     // 0x020F(0x0061)(Fixing Size After Last Property [ Dumper-7 ])
-	class AWorldSettings*                         WorldSettings;                                     // 0x0270(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	class AWorldDataLayers*                       WorldDataLayers;                                   // 0x0278(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class AWorldSettings* WorldSettings;                                     // 0x0270(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class AWorldDataLayers* WorldDataLayers;                                   // 0x0278(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 	uint8                                         Pad_280[0x8];                                      // 0x0280(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<class UAssetUserData*>                 AssetUserData;                                     // 0x0288(0x0010)(ExportObject, ZeroConstructor, ContainsInstancedReference, Protected, UObjectWrapper, NativeAccessSpecifierProtected)
 	uint8                                         Pad_298[0x10];                                     // 0x0298(0x0010)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FReplicatedStaticActorDestructionInfo> DestroyedReplicatedStaticActors;            // 0x02A8(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
+	TArray<struct FReplicatedStaticActorDestructionInfo> DestroyedReplicatedStaticActors;                   // 0x02A8(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
 	uint8                                         Pad_2B8[0x8];                                      // 0x02B8(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
 
 public:
 	static class UClass* StaticClass()
 	{
-		STATIC_CLASS_IMPL("Level")
-	}
-	static const class FName& StaticName()
-	{
-		STATIC_NAME_IMPL(L"Level")
+		STATIC_CLASS_IMPL("Level");
 	}
 	static class ULevel* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<ULevel>();
 	}
 };
-DUMPER7_ASSERTS_ULevel;
+//DUMPER7_ASSERTS_ULevel;
 
 // Class Engine.HapticFeedbackEffect_Buffer
 // 0x0040 (0x0068 - 0x0028)

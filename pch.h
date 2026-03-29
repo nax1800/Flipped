@@ -8,7 +8,7 @@
 #include <string>
 
 #define DEV
-#define NOMCP
+//#define NOMCP
 //#define CHEATS
 //#define LATEGAME
 //#define CREATIVE

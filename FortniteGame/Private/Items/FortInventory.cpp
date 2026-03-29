@@ -198,6 +198,8 @@ bool FortInventory::AddItem(AFortInventory* Context, UFortItemDefinition* ItemDe
 	Context->HandleInventoryLocalUpdate();
 	Context->Inventory.MarkArrayDirty();
 	Context->Inventory.MarkItemDirty(ItemEntry);
+
+	return true;
 }
 
 bool FortInventory::AddItem(AFortInventory* Context, FFortItemEntry ItemEntry, bool bForceNewItem)
